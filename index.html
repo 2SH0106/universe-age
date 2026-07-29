@@ -11,9 +11,13 @@
   <title>우주의 나이 탐구</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 40px 20px;
+      padding: 30px 18px;
       background-color: #080d22;
       color: white;
       font-family:
@@ -22,44 +26,49 @@
         sans-serif;
     }
 
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
     .container {
-      max-width: 900px;
+      width: 100%;
+      max-width: 950px;
       margin: 0 auto;
     }
 
     .top-bar {
       display: flex;
-      justify-content: flex-end;
-      margin-bottom: 20px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .app-name {
+      color: #9fa9d7;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     h1 {
       color: #f0d082;
+      line-height: 1.35;
+    }
+
+    h2,
+    h3 {
+      line-height: 1.4;
     }
 
     p {
-      line-height: 1.7;
       color: #c8cdea;
-    }
-
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    .card {
-      margin-top: 30px;
-      padding: 24px;
-      background-color: #131b41;
-      border: 1px solid #2a3468;
-      border-radius: 16px;
+      line-height: 1.75;
     }
 
     button {
-      padding: 12px 20px;
+      padding: 11px 18px;
       background-color: #57d9a3;
       color: #08210f;
       border: none;
@@ -78,15 +87,90 @@
       cursor: not-allowed;
     }
 
-    .settings-button {
+    .teacher-button {
       background-color: #f0d082;
       color: #171b34;
     }
 
+    .secondary-button {
+      background-color: #35406f;
+      color: white;
+    }
+
+    .danger-button {
+      background-color: #ff8daa;
+      color: #38121c;
+    }
+
+    .small-button {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      margin-top: 22px;
+      padding: 24px;
+      background-color: #131b41;
+      border: 1px solid #2a3468;
+      border-radius: 16px;
+    }
+
+    .intro-card {
+      border-color: #4a589a;
+    }
+
+    .activity-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .activity-card {
+      padding: 22px;
+      background-color: #131b41;
+      border: 1px solid #2a3468;
+      border-radius: 16px;
+    }
+
+    .activity-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #57d9a3;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .activity-card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .activity-card p {
+      margin-top: 0;
+    }
+
+    .hidden-message {
+      padding: 24px;
+      background-color: #131b41;
+      border: 1px dashed #52609e;
+      border-radius: 16px;
+      color: #b8c0e7;
+      text-align: center;
+    }
+
     .settings-panel {
       display: none;
-      margin-bottom: 24px;
-      padding: 20px;
+      margin-bottom: 25px;
+      padding: 22px;
       background-color: #111936;
       border: 1px solid #f0d082;
       border-radius: 16px;
@@ -96,13 +180,22 @@
       display: block;
     }
 
+    .settings-description {
+      margin-bottom: 20px;
+      padding: 14px;
+      background-color: #191f46;
+      border-radius: 10px;
+      color: #d7dcf4;
+      font-size: 14px;
+    }
+
     .field {
       margin-bottom: 16px;
     }
 
     .field label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
       color: #f0d082;
       font-weight: bold;
     }
@@ -111,42 +204,81 @@
     .field textarea {
       width: 100%;
       padding: 12px;
-      box-sizing: border-box;
       background-color: #080d22;
       color: white;
-      border: 1px solid #2a3468;
-      border-radius: 10px;
+      border: 1px solid #35406f;
+      border-radius: 9px;
       font-size: 15px;
-      font-family: inherit;
     }
 
     .field textarea {
-      min-height: 90px;
+      min-height: 85px;
       resize: vertical;
+    }
+
+    .teacher-activity-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .teacher-activity-card {
+      padding: 18px;
+      background-color: #171f46;
+      border: 1px solid #35406f;
+      border-radius: 14px;
+    }
+
+    .teacher-activity-card h3 {
+      margin-top: 0;
+      color: #57d9a3;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 12px 0 16px;
+    }
+
+    .checkbox-row input {
+      width: 19px;
+      height: 19px;
+    }
+
+    .checkbox-row label {
+      color: white;
+      font-weight: bold;
+    }
+
+    .order-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
 
     .settings-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-    }
-
-    .reset-button {
-      background-color: #ff8daa;
-      color: #31121a;
+      margin-top: 22px;
     }
 
     .notice {
       display: none;
-      margin-top: 12px;
-      color: #57d9a3;
+      margin-top: 15px;
+      padding: 12px;
+      background-color: #11362d;
+      border-radius: 9px;
+      color: #79e7ba;
       font-weight: bold;
     }
 
     .age-options {
       display: grid;
       grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
+        repeat(auto-fit, minmax(170px, 1fr));
       gap: 12px;
       margin-top: 20px;
     }
@@ -155,7 +287,7 @@
       padding: 18px;
       background-color: #111936;
       color: white;
-      border: 1px solid #2a3468;
+      border: 1px solid #35406f;
       border-radius: 14px;
       text-align: left;
     }
@@ -164,11 +296,11 @@
       display: block;
       margin-bottom: 6px;
       color: #f0d082;
-      font-size: 21px;
+      font-size: 20px;
     }
 
     .age-option span {
-      color: #aab3dd;
+      color: #afb7df;
       font-size: 13px;
     }
 
@@ -179,7 +311,7 @@
 
     .result-box {
       display: none;
-      margin-top: 20px;
+      margin-top: 18px;
       padding: 15px;
       background-color: #102e28;
       border-left: 4px solid #57d9a3;
@@ -198,14 +330,18 @@
       margin-top: 22px;
     }
 
-    .back-button {
-      background-color: #2a3468;
-      color: white;
-    }
-
     @media (max-width: 600px) {
       body {
-        padding: 24px 14px;
+        padding: 20px 12px;
+      }
+
+      .top-bar {
+        align-items: flex-start;
+      }
+
+      .card,
+      .activity-card {
+        padding: 19px;
       }
     }
   </style>
@@ -215,10 +351,14 @@
   <main class="container">
 
     <div class="top-bar">
+      <div class="app-name">
+        우주의 나이 탐구 웹앱
+      </div>
+
       <button
-        class="settings-button"
+        class="teacher-button"
         type="button"
-        onclick="toggleSettings()"
+        onclick="toggleTeacherPanel()"
       >
         ⚙ 교사용 편집
       </button>
@@ -226,73 +366,54 @@
 
     <section
       class="settings-panel"
-      id="settingsPanel"
+      id="teacherPanel"
     >
-      <h2>교사용 문구 설정</h2>
+      <h2>교사용 활동 편집</h2>
+
+      <div class="settings-description">
+        각 활동의 제목과 설명을 수정하고,
+        학생 화면에서 보이게 할지 결정할 수 있습니다.
+        화살표 버튼으로 활동 순서도 변경할 수 있습니다.
+      </div>
 
       <div class="field">
-        <label for="titleInput">
-          메인 제목
+        <label for="mainTitleInput">
+          웹앱 메인 제목
         </label>
 
         <input
-          id="titleInput"
+          id="mainTitleInput"
           type="text"
         >
       </div>
 
       <div class="field">
-        <label for="introInput">
-          첫 번째 설명
+        <label for="mainIntroInput">
+          웹앱 안내 문구
         </label>
 
-        <textarea id="introInput"></textarea>
+        <textarea id="mainIntroInput"></textarea>
       </div>
 
-      <div class="field">
-        <label for="predictTitleInput">
-          활동 제목
-        </label>
-
-        <input
-          id="predictTitleInput"
-          type="text"
-        >
-      </div>
-
-      <div class="field">
-        <label for="predictTextInput">
-          활동 설명
-        </label>
-
-        <textarea id="predictTextInput"></textarea>
-      </div>
-
-      <div class="field">
-        <label for="buttonTextInput">
-          시작 버튼 문구
-        </label>
-
-        <input
-          id="buttonTextInput"
-          type="text"
-        >
-      </div>
+      <div
+        class="teacher-activity-list"
+        id="teacherActivityList"
+      ></div>
 
       <div class="settings-actions">
         <button
           type="button"
-          onclick="saveSettings()"
+          onclick="saveTeacherSettings()"
         >
-          저장하기
+          변경 내용 저장
         </button>
 
         <button
-          class="reset-button"
+          class="danger-button"
           type="button"
-          onclick="resetSettings()"
+          onclick="resetTeacherSettings()"
         >
-          기본값으로 되돌리기
+          모두 기본값으로 되돌리기
         </button>
       </div>
 
@@ -300,53 +421,40 @@
         class="notice"
         id="saveNotice"
       >
-        저장되었습니다.
+        변경 내용이 저장되었습니다.
       </div>
     </section>
 
     <section
       class="screen active"
-      id="startScreen"
+      id="homeScreen"
     >
-      <h1 id="mainTitle">
-        우주의 나이를 밝혀라
-      </h1>
+      <h1 id="mainTitle"></h1>
 
-      <p id="mainIntro">
-        실제 천문학 데이터를 활용하여
-        우주의 나이를 추정하는 탐구 활동입니다.
-      </p>
+      <p id="mainIntro"></p>
 
-      <section class="card">
-        <h2 id="predictTitle">
-          예측하기
-        </h2>
+      <section class="card intro-card">
+        <h2>탐구 활동 목록</h2>
 
-        <p id="predictText">
-          우주의 나이는 약 몇 억 년일까요?
-          자료를 분석하기 전에 먼저 예상해 봅시다.
+        <p>
+          아래 활동을 순서대로 진행하며
+          우주의 나이를 추정해 봅시다.
         </p>
-
-        <button
-          id="startButton"
-          type="button"
-          onclick="showPredictionScreen()"
-        >
-          탐구 시작
-        </button>
       </section>
+
+      <div
+        class="activity-list"
+        id="studentActivityList"
+      ></div>
     </section>
 
     <section
       class="screen"
       id="predictionScreen"
     >
-      <h1>우주의 나이를 예측해 보세요</h1>
+      <h1 id="predictionPageTitle"></h1>
 
-      <p>
-        아직 자료를 보지 않은 상태에서
-        자신의 생각과 가장 가까운 값을 선택하세요.
-      </p>
+      <p id="predictionPageDescription"></p>
 
       <section class="card">
         <div class="age-options">
@@ -398,15 +506,15 @@
 
         <div class="action-area">
           <button
-            class="back-button"
+            class="secondary-button"
             type="button"
-            onclick="showStartScreen()"
+            onclick="showHomeScreen()"
           >
-            이전
+            활동 목록
           </button>
 
           <button
-            id="nextButton"
+            id="savePredictionButton"
             type="button"
             onclick="savePrediction()"
             disabled
@@ -419,23 +527,27 @@
 
     <section
       class="screen"
-      id="completeScreen"
+      id="reverseTimeScreen"
     >
-      <h1>예측이 저장되었습니다</h1>
+      <h1 id="reversePageTitle"></h1>
+
+      <p id="reversePageDescription"></p>
 
       <section class="card">
-        <p id="savedPredictionText"></p>
+        <h2>이 활동은 다음 단계에서 완성됩니다</h2>
 
         <p>
-          다음 단계에서는 시간을 거꾸로 돌리며
-          과거 우주의 모습을 관찰하게 됩니다.
+          다음 단계에서는 노란색 은하와 파란색 은하,
+          시간 조절 슬라이더와 은하 이동 애니메이션을
+          이 공간에 넣겠습니다.
         </p>
 
         <button
+          class="secondary-button"
           type="button"
-          onclick="showPredictionScreen()"
+          onclick="showHomeScreen()"
         >
-          예측 다시 선택하기
+          활동 목록으로 돌아가기
         </button>
       </section>
     </section>
@@ -443,99 +555,303 @@
   </main>
 
   <script>
-    const defaultSettings = {
-      mainTitle: "우주의 나이를 밝혀라",
+    const defaultData = {
+      mainTitle: "MISSION: 우주의 나이를 밝혀라",
 
       mainIntro:
-        "실제 천문학 데이터를 활용하여 우주의 나이를 추정하는 탐구 활동입니다.",
+        "실제 천문학적 개념과 자료를 활용하여 우주의 팽창을 이해하고 우주의 나이를 추정하는 탐구 활동입니다.",
 
-      predictTitle: "예측하기",
-
-      predictText:
-        "우주의 나이는 약 몇 억 년일까요? 자료를 분석하기 전에 먼저 예상해 봅시다.",
-
-      buttonText: "탐구 시작"
+      activities: [
+        {
+          id: "prediction",
+          title: "우주의 나이 예측하기",
+          description:
+            "자료를 확인하기 전에 우주의 나이가 얼마나 될지 자신의 생각을 선택합니다.",
+          visible: true
+        },
+        {
+          id: "reverseTime",
+          title: "시간을 거꾸로 돌려보기",
+          description:
+            "팽창하는 우주의 시간을 거꾸로 돌리며 과거 은하 사이의 거리 변화를 관찰합니다.",
+          visible: true
+        }
+      ]
     };
 
+    let appData = loadAppData();
     let selectedAge = null;
 
-    function loadSettings() {
-      const savedSettings =
-        localStorage.getItem("universeAgeSettings");
+    function cloneDefaultData() {
+      return JSON.parse(
+        JSON.stringify(defaultData)
+      );
+    }
 
-      if (savedSettings) {
-        return JSON.parse(savedSettings);
+    function loadAppData() {
+      const savedData =
+        localStorage.getItem(
+          "universeAgeAppData"
+        );
+
+      if (!savedData) {
+        return cloneDefaultData();
       }
 
-      return defaultSettings;
+      try {
+        const parsedData =
+          JSON.parse(savedData);
+
+        if (
+          !parsedData.activities ||
+          !Array.isArray(parsedData.activities)
+        ) {
+          return cloneDefaultData();
+        }
+
+        return parsedData;
+      } catch (error) {
+        return cloneDefaultData();
+      }
     }
 
-    function applySettings(settings) {
-      document.getElementById("mainTitle").textContent =
-        settings.mainTitle;
-
-      document.getElementById("mainIntro").textContent =
-        settings.mainIntro;
-
-      document.getElementById("predictTitle").textContent =
-        settings.predictTitle;
-
-      document.getElementById("predictText").textContent =
-        settings.predictText;
-
-      document.getElementById("startButton").textContent =
-        settings.buttonText;
-
-      document.getElementById("titleInput").value =
-        settings.mainTitle;
-
-      document.getElementById("introInput").value =
-        settings.mainIntro;
-
-      document.getElementById("predictTitleInput").value =
-        settings.predictTitle;
-
-      document.getElementById("predictTextInput").value =
-        settings.predictText;
-
-      document.getElementById("buttonTextInput").value =
-        settings.buttonText;
+    function saveAppData() {
+      localStorage.setItem(
+        "universeAgeAppData",
+        JSON.stringify(appData)
+      );
     }
 
-    function toggleSettings() {
+    function toggleTeacherPanel() {
       document
-        .getElementById("settingsPanel")
+        .getElementById("teacherPanel")
         .classList
         .toggle("open");
     }
 
-    function saveSettings() {
-      const newSettings = {
-        mainTitle:
-          document.getElementById("titleInput").value,
+    function renderAll() {
+      renderMainText();
+      renderStudentActivities();
+      renderTeacherActivities();
+      updateActivityPages();
+    }
 
-        mainIntro:
-          document.getElementById("introInput").value,
+    function renderMainText() {
+      document
+        .getElementById("mainTitle")
+        .textContent = appData.mainTitle;
 
-        predictTitle:
-          document.getElementById("predictTitleInput").value,
+      document
+        .getElementById("mainIntro")
+        .textContent = appData.mainIntro;
 
-        predictText:
-          document.getElementById("predictTextInput").value,
+      document
+        .getElementById("mainTitleInput")
+        .value = appData.mainTitle;
 
-        buttonText:
-          document.getElementById("buttonTextInput").value
-      };
+      document
+        .getElementById("mainIntroInput")
+        .value = appData.mainIntro;
+    }
 
-      localStorage.setItem(
-        "universeAgeSettings",
-        JSON.stringify(newSettings)
+    function renderStudentActivities() {
+      const list =
+        document.getElementById(
+          "studentActivityList"
+        );
+
+      list.innerHTML = "";
+
+      const visibleActivities =
+        appData.activities.filter(
+          function (activity) {
+            return activity.visible;
+          }
+        );
+
+      if (visibleActivities.length === 0) {
+        list.innerHTML = `
+          <div class="hidden-message">
+            현재 학생에게 공개된 활동이 없습니다.
+          </div>
+        `;
+
+        return;
+      }
+
+      visibleActivities.forEach(
+        function (activity, index) {
+          const card =
+            document.createElement("section");
+
+          card.className = "activity-card";
+
+          card.innerHTML = `
+            <span class="activity-number">
+              ACTIVITY ${index + 1}
+            </span>
+
+            <h2>${escapeHtml(activity.title)}</h2>
+
+            <p>
+              ${escapeHtml(activity.description)}
+            </p>
+
+            <button
+              type="button"
+              onclick="openActivity('${activity.id}')"
+            >
+              활동 시작
+            </button>
+          `;
+
+          list.appendChild(card);
+        }
       );
+    }
 
-      applySettings(newSettings);
+    function renderTeacherActivities() {
+      const list =
+        document.getElementById(
+          "teacherActivityList"
+        );
+
+      list.innerHTML = "";
+
+      appData.activities.forEach(
+        function (activity, index) {
+          const card =
+            document.createElement("section");
+
+          card.className =
+            "teacher-activity-card";
+
+          card.innerHTML = `
+            <h3>
+              활동 ${index + 1}
+            </h3>
+
+            <div class="field">
+              <label
+                for="activityTitle${index}"
+              >
+                활동 제목
+              </label>
+
+              <input
+                id="activityTitle${index}"
+                type="text"
+                value="${escapeAttribute(activity.title)}"
+              >
+            </div>
+
+            <div class="field">
+              <label
+                for="activityDescription${index}"
+              >
+                활동 설명
+              </label>
+
+              <textarea
+                id="activityDescription${index}"
+              >${escapeHtml(activity.description)}</textarea>
+            </div>
+
+            <div class="checkbox-row">
+              <input
+                id="activityVisible${index}"
+                type="checkbox"
+                ${activity.visible ? "checked" : ""}
+              >
+
+              <label
+                for="activityVisible${index}"
+              >
+                학생 화면에 이 활동 보이기
+              </label>
+            </div>
+
+            <div class="order-buttons">
+              <button
+                class="secondary-button small-button"
+                type="button"
+                onclick="moveActivity(${index}, -1)"
+                ${index === 0 ? "disabled" : ""}
+              >
+                ▲ 위로 이동
+              </button>
+
+              <button
+                class="secondary-button small-button"
+                type="button"
+                onclick="moveActivity(${index}, 1)"
+                ${
+                  index ===
+                  appData.activities.length - 1
+                    ? "disabled"
+                    : ""
+                }
+              >
+                ▼ 아래로 이동
+              </button>
+            </div>
+          `;
+
+          list.appendChild(card);
+        }
+      );
+    }
+
+    function collectTeacherInputs() {
+      appData.mainTitle =
+        document
+          .getElementById("mainTitleInput")
+          .value
+          .trim();
+
+      appData.mainIntro =
+        document
+          .getElementById("mainIntroInput")
+          .value
+          .trim();
+
+      appData.activities.forEach(
+        function (activity, index) {
+          activity.title =
+            document
+              .getElementById(
+                "activityTitle" + index
+              )
+              .value
+              .trim();
+
+          activity.description =
+            document
+              .getElementById(
+                "activityDescription" + index
+              )
+              .value
+              .trim();
+
+          activity.visible =
+            document
+              .getElementById(
+                "activityVisible" + index
+              )
+              .checked;
+        }
+      );
+    }
+
+    function saveTeacherSettings() {
+      collectTeacherInputs();
+      saveAppData();
+      renderAll();
 
       const notice =
-        document.getElementById("saveNotice");
+        document.getElementById(
+          "saveNotice"
+        );
 
       notice.style.display = "block";
 
@@ -544,12 +860,102 @@
       }, 2000);
     }
 
-    function resetSettings() {
-      localStorage.removeItem(
-        "universeAgeSettings"
+    function resetTeacherSettings() {
+      const confirmed = confirm(
+        "교사용 편집 내용을 모두 기본값으로 되돌릴까요?"
       );
 
-      applySettings(defaultSettings);
+      if (!confirmed) {
+        return;
+      }
+
+      localStorage.removeItem(
+        "universeAgeAppData"
+      );
+
+      appData = cloneDefaultData();
+
+      renderAll();
+    }
+
+    function moveActivity(
+      currentIndex,
+      direction
+    ) {
+      collectTeacherInputs();
+
+      const newIndex =
+        currentIndex + direction;
+
+      if (
+        newIndex < 0 ||
+        newIndex >= appData.activities.length
+      ) {
+        return;
+      }
+
+      const movedActivity =
+        appData.activities.splice(
+          currentIndex,
+          1
+        )[0];
+
+      appData.activities.splice(
+        newIndex,
+        0,
+        movedActivity
+      );
+
+      saveAppData();
+      renderAll();
+    }
+
+    function updateActivityPages() {
+      const predictionActivity =
+        appData.activities.find(
+          function (activity) {
+            return activity.id === "prediction";
+          }
+        );
+
+      const reverseTimeActivity =
+        appData.activities.find(
+          function (activity) {
+            return activity.id === "reverseTime";
+          }
+        );
+
+      if (predictionActivity) {
+        document
+          .getElementById(
+            "predictionPageTitle"
+          )
+          .textContent =
+          predictionActivity.title;
+
+        document
+          .getElementById(
+            "predictionPageDescription"
+          )
+          .textContent =
+          predictionActivity.description;
+      }
+
+      if (reverseTimeActivity) {
+        document
+          .getElementById(
+            "reversePageTitle"
+          )
+          .textContent =
+          reverseTimeActivity.title;
+
+        document
+          .getElementById(
+            "reversePageDescription"
+          )
+          .textContent =
+          reverseTimeActivity.description;
+      }
     }
 
     function hideAllScreens() {
@@ -560,27 +966,45 @@
         });
     }
 
-    function showStartScreen() {
+    function showHomeScreen() {
       hideAllScreens();
 
       document
-        .getElementById("startScreen")
+        .getElementById("homeScreen")
         .classList.add("active");
+
+      window.scrollTo(0, 0);
     }
 
-    function showPredictionScreen() {
+    function openActivity(activityId) {
       hideAllScreens();
 
-      document
-        .getElementById("predictionScreen")
-        .classList.add("active");
+      if (activityId === "prediction") {
+        document
+          .getElementById(
+            "predictionScreen"
+          )
+          .classList.add("active");
+      }
+
+      if (activityId === "reverseTime") {
+        document
+          .getElementById(
+            "reverseTimeScreen"
+          )
+          .classList.add("active");
+      }
+
+      window.scrollTo(0, 0);
     }
 
     function selectAge(button) {
       document
         .querySelectorAll(".age-option")
         .forEach(function (option) {
-          option.classList.remove("selected");
+          option.classList.remove(
+            "selected"
+          );
         });
 
       button.classList.add("selected");
@@ -589,17 +1013,21 @@
         button.getAttribute("data-age");
 
       const result =
-        document.getElementById("predictionResult");
+        document.getElementById(
+          "predictionResult"
+        );
 
       result.textContent =
-        "선택한 예상값: " +
+        "내가 예상한 우주의 나이: " +
         selectedAge +
         "억 년";
 
       result.classList.add("show");
 
       document
-        .getElementById("nextButton")
+        .getElementById(
+          "savePredictionButton"
+        )
         .disabled = false;
     }
 
@@ -613,32 +1041,26 @@
         selectedAge
       );
 
-      document
-        .getElementById("savedPredictionText")
-        .textContent =
-        "내가 예상한 우주의 나이: " +
+      alert(
         selectedAge +
-        "억 년";
-
-      hideAllScreens();
-
-      document
-        .getElementById("completeScreen")
-        .classList.add("active");
-    }
-
-    const currentSettings = loadSettings();
-
-    applySettings(currentSettings);
-
-    const savedAge =
-      localStorage.getItem(
-        "universeAgePrediction"
+        "억 년으로 예측을 저장했습니다."
       );
-
-    if (savedAge) {
-      selectedAge = savedAge;
     }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttribute(text) {
+      return escapeHtml(text);
+    }
+
+    renderAll();
   </script>
 </body>
 </html>
