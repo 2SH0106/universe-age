@@ -1673,5 +1673,22 @@ document
     updateUniverse();
     loadStudentAnswers();
   </script>
+<script>
+  fetch("data/activities.json")
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error("활동 데이터를 불러오지 못했습니다.");
+      }
+
+      return response.json();
+    })
+    .then(function(data) {
+      console.log("활동 데이터 불러오기 성공:", data);
+    })
+    .catch(function(error) {
+      console.error("활동 데이터 불러오기 실패:", error);
+    });
+</script>
+  
 </body>
 </html>
