@@ -1,0 +1,29 @@
+{
+  "mainTitle": "MISSION: 우주의 나이를 밝혀라",
+  "mainIntro": "실제 천문학적 개념과 자료를 활용하여 우주의 팽창을 이해하고 우주의 나이를 추정하는 탐구 활동입니다.",
+  "activities": [
+    {
+      "id": "prediction",
+      "type": "prediction",
+      "title": "우주의 나이 예측하기",
+      "description": "자료를 확인하기 전에 우주의 나이가 얼마나 될지 자신의 생각을 선택합니다.",
+      "visible": true
+    },
+    {
+      "id": "reverseTime",
+      "type": "animation",
+      "title": "시간을 거꾸로 돌려보기",
+      "description": "팽창하는 우주의 시간을 거꾸로 돌리며 과거 은하 사이의 거리 변화를 관찰합니다.",
+      "visible": true,
+      "settings": {
+        "yellowDescription": "노란색 점은 관찰의 기준이 되는 우리 은하를 나타냅니다.",
+        "blueDescription": "파란색 점은 우리 은하에서 멀어지는 다른 은하들을 나타냅니다.",
+        "observationGuide": "시간 슬라이더를 움직여 과거로 갈수록 은하 사이의 거리가 어떻게 달라지는지 관찰하세요.",
+        "question": "시간을 과거로 돌릴수록 은하 사이의 거리는 어떻게 변했나요? 이 관찰을 통해 초기 우주의 모습은 어떠했을지 설명해 보세요.",
+        "answerPlaceholder": "예: 과거로 갈수록 은하 사이의 거리가 가까워졌습니다.",
+        "sliderStartLabel": "현재",
+        "sliderEndLabel": "더 먼 과거"
+      }
+    }
+  ]
+}
