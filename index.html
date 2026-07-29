@@ -42,6 +42,14 @@
       color: #c8cdea;
     }
 
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
     .card {
       margin-top: 30px;
       padding: 24px;
@@ -63,6 +71,11 @@
 
     button:hover {
       opacity: 0.9;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
     .settings-button {
@@ -129,6 +142,72 @@
       color: #57d9a3;
       font-weight: bold;
     }
+
+    .age-options {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .age-option {
+      padding: 18px;
+      background-color: #111936;
+      color: white;
+      border: 1px solid #2a3468;
+      border-radius: 14px;
+      text-align: left;
+    }
+
+    .age-option strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #f0d082;
+      font-size: 21px;
+    }
+
+    .age-option span {
+      color: #aab3dd;
+      font-size: 13px;
+    }
+
+    .age-option.selected {
+      background-color: #183b49;
+      border: 2px solid #5fd2e4;
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #102e28;
+      border-left: 4px solid #57d9a3;
+      border-radius: 10px;
+      color: #d4f7e9;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    .action-area {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .back-button {
+      background-color: #2a3468;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 14px;
+      }
+    }
   </style>
 </head>
 
@@ -191,7 +270,7 @@
 
       <div class="field">
         <label for="buttonTextInput">
-          버튼 문구
+          시작 버튼 문구
         </label>
 
         <input
@@ -225,32 +304,142 @@
       </div>
     </section>
 
-    <h1 id="mainTitle">
-      우주의 나이를 밝혀라
-    </h1>
+    <section
+      class="screen active"
+      id="startScreen"
+    >
+      <h1 id="mainTitle">
+        우주의 나이를 밝혀라
+      </h1>
 
-    <p id="mainIntro">
-      실제 천문학 데이터를 활용하여
-      우주의 나이를 추정하는 탐구 활동입니다.
-    </p>
-
-    <section class="card">
-      <h2 id="predictTitle">
-        예측하기
-      </h2>
-
-      <p id="predictText">
-        우주의 나이는 약 몇 억 년일까요?
-        자료를 분석하기 전에 먼저 예상해 봅시다.
+      <p id="mainIntro">
+        실제 천문학 데이터를 활용하여
+        우주의 나이를 추정하는 탐구 활동입니다.
       </p>
 
-      <button
-        id="startButton"
-        type="button"
-      >
-        탐구 시작
-      </button>
+      <section class="card">
+        <h2 id="predictTitle">
+          예측하기
+        </h2>
+
+        <p id="predictText">
+          우주의 나이는 약 몇 억 년일까요?
+          자료를 분석하기 전에 먼저 예상해 봅시다.
+        </p>
+
+        <button
+          id="startButton"
+          type="button"
+          onclick="showPredictionScreen()"
+        >
+          탐구 시작
+        </button>
+      </section>
     </section>
+
+    <section
+      class="screen"
+      id="predictionScreen"
+    >
+      <h1>우주의 나이를 예측해 보세요</h1>
+
+      <p>
+        아직 자료를 보지 않은 상태에서
+        자신의 생각과 가장 가까운 값을 선택하세요.
+      </p>
+
+      <section class="card">
+        <div class="age-options">
+          <button
+            class="age-option"
+            type="button"
+            data-age="45"
+            onclick="selectAge(this)"
+          >
+            <strong>45억 년</strong>
+            <span>지구와 비슷한 나이</span>
+          </button>
+
+          <button
+            class="age-option"
+            type="button"
+            data-age="90"
+            onclick="selectAge(this)"
+          >
+            <strong>90억 년</strong>
+            <span>지구 나이의 약 두 배</span>
+          </button>
+
+          <button
+            class="age-option"
+            type="button"
+            data-age="138"
+            onclick="selectAge(this)"
+          >
+            <strong>138억 년</strong>
+            <span>현재 과학에서 제시하는 대표값</span>
+          </button>
+
+          <button
+            class="age-option"
+            type="button"
+            data-age="300"
+            onclick="selectAge(this)"
+          >
+            <strong>300억 년</strong>
+            <span>매우 오래된 우주</span>
+          </button>
+        </div>
+
+        <div
+          class="result-box"
+          id="predictionResult"
+        ></div>
+
+        <div class="action-area">
+          <button
+            class="back-button"
+            type="button"
+            onclick="showStartScreen()"
+          >
+            이전
+          </button>
+
+          <button
+            id="nextButton"
+            type="button"
+            onclick="savePrediction()"
+            disabled
+          >
+            선택 저장
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section
+      class="screen"
+      id="completeScreen"
+    >
+      <h1>예측이 저장되었습니다</h1>
+
+      <section class="card">
+        <p id="savedPredictionText"></p>
+
+        <p>
+          다음 단계에서는 시간을 거꾸로 돌리며
+          과거 우주의 모습을 관찰하게 됩니다.
+        </p>
+
+        <button
+          type="button"
+          onclick="showPredictionScreen()"
+        >
+          예측 다시 선택하기
+        </button>
+      </section>
+    </section>
+
   </main>
 
   <script>
@@ -267,6 +456,8 @@
 
       buttonText: "탐구 시작"
     };
+
+    let selectedAge = null;
 
     function loadSettings() {
       const savedSettings =
@@ -361,9 +552,93 @@
       applySettings(defaultSettings);
     }
 
+    function hideAllScreens() {
+      document
+        .querySelectorAll(".screen")
+        .forEach(function (screen) {
+          screen.classList.remove("active");
+        });
+    }
+
+    function showStartScreen() {
+      hideAllScreens();
+
+      document
+        .getElementById("startScreen")
+        .classList.add("active");
+    }
+
+    function showPredictionScreen() {
+      hideAllScreens();
+
+      document
+        .getElementById("predictionScreen")
+        .classList.add("active");
+    }
+
+    function selectAge(button) {
+      document
+        .querySelectorAll(".age-option")
+        .forEach(function (option) {
+          option.classList.remove("selected");
+        });
+
+      button.classList.add("selected");
+
+      selectedAge =
+        button.getAttribute("data-age");
+
+      const result =
+        document.getElementById("predictionResult");
+
+      result.textContent =
+        "선택한 예상값: " +
+        selectedAge +
+        "억 년";
+
+      result.classList.add("show");
+
+      document
+        .getElementById("nextButton")
+        .disabled = false;
+    }
+
+    function savePrediction() {
+      if (!selectedAge) {
+        return;
+      }
+
+      localStorage.setItem(
+        "universeAgePrediction",
+        selectedAge
+      );
+
+      document
+        .getElementById("savedPredictionText")
+        .textContent =
+        "내가 예상한 우주의 나이: " +
+        selectedAge +
+        "억 년";
+
+      hideAllScreens();
+
+      document
+        .getElementById("completeScreen")
+        .classList.add("active");
+    }
+
     const currentSettings = loadSettings();
 
     applySettings(currentSettings);
+
+    const savedAge =
+      localStorage.getItem(
+        "universeAgePrediction"
+      );
+
+    if (savedAge) {
+      selectedAge = savedAge;
+    }
   </script>
 </body>
 </html>
