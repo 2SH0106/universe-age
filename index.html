@@ -18,7 +18,8 @@
     body {
       margin: 0;
       padding: 30px 18px;
-      background-color: #080d22;
+      background:
+        radial-gradient(circle at top, #18224f 0%, #080d22 45%);
       color: white;
       font-family:
         "Malgun Gothic",
@@ -34,7 +35,7 @@
 
     .container {
       width: 100%;
-      max-width: 950px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -47,7 +48,7 @@
     }
 
     .app-name {
-      color: #9fa9d7;
+      color: #aeb7e4;
       font-size: 14px;
       font-weight: bold;
     }
@@ -87,6 +88,11 @@
       cursor: not-allowed;
     }
 
+    input,
+    textarea {
+      font-size: 15px;
+    }
+
     .teacher-button {
       background-color: #f0d082;
       color: #171b34;
@@ -118,13 +124,9 @@
     .card {
       margin-top: 22px;
       padding: 24px;
-      background-color: #131b41;
+      background-color: rgba(19, 27, 65, 0.96);
       border: 1px solid #2a3468;
       border-radius: 16px;
-    }
-
-    .intro-card {
-      border-color: #4a589a;
     }
 
     .activity-list {
@@ -135,7 +137,7 @@
 
     .activity-card {
       padding: 22px;
-      background-color: #131b41;
+      background-color: rgba(19, 27, 65, 0.96);
       border: 1px solid #2a3468;
       border-radius: 16px;
     }
@@ -151,20 +153,6 @@
     .activity-card h2 {
       margin-top: 0;
       margin-bottom: 8px;
-      color: white;
-    }
-
-    .activity-card p {
-      margin-top: 0;
-    }
-
-    .hidden-message {
-      padding: 24px;
-      background-color: #131b41;
-      border: 1px dashed #52609e;
-      border-radius: 16px;
-      color: #b8c0e7;
-      text-align: center;
     }
 
     .settings-panel {
@@ -208,7 +196,6 @@
       color: white;
       border: 1px solid #35406f;
       border-radius: 9px;
-      font-size: 15px;
     }
 
     .field textarea {
@@ -251,18 +238,13 @@
       font-weight: bold;
     }
 
-    .order-buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .settings-actions {
+    .order-buttons,
+    .settings-actions,
+    .action-area {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 22px;
+      margin-top: 18px;
     }
 
     .notice {
@@ -323,11 +305,152 @@
       display: block;
     }
 
-    .action-area {
+    .space-panel {
+      margin-top: 20px;
+      padding: 18px;
+      background-color: #050816;
+      border: 1px solid #344071;
+      border-radius: 16px;
+    }
+
+    .space-stage {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, #182758 0%, #070a19 55%, #02030a 100%);
+      border-radius: 14px;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.65;
+    }
+
+    .galaxy {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition:
+        left 0.25s ease,
+        top 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .center-galaxy {
+      left: 50%;
+      top: 50%;
+      width: 28px;
+      height: 28px;
+      background-color: #ffd95a;
+      box-shadow:
+        0 0 10px #ffd95a,
+        0 0 24px rgba(255, 217, 90, 0.8);
+      z-index: 5;
+    }
+
+    .outer-galaxy {
+      width: 18px;
+      height: 18px;
+      background-color: #65c8ff;
+      box-shadow:
+        0 0 9px #65c8ff,
+        0 0 20px rgba(101, 200, 255, 0.65);
+    }
+
+    .time-control {
+      margin-top: 20px;
+      padding: 18px;
+      background-color: #111936;
+      border-radius: 14px;
+    }
+
+    .time-label {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: #dce2ff;
+      font-weight: bold;
+    }
+
+    .time-value {
+      color: #57d9a3;
+    }
+
+    .time-slider {
+      width: 100%;
+      accent-color: #57d9a3;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .legend-item {
+      padding: 14px;
+      background-color: #111936;
+      border-radius: 12px;
+      color: #d8def7;
+      line-height: 1.6;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 8px;
+      border-radius: 50%;
+      vertical-align: -2px;
+    }
+
+    .yellow-dot {
+      background-color: #ffd95a;
+      box-shadow: 0 0 8px #ffd95a;
+    }
+
+    .blue-dot {
+      background-color: #65c8ff;
+      box-shadow: 0 0 8px #65c8ff;
+    }
+
+    .question-box {
       margin-top: 22px;
+      padding: 20px;
+      background-color: #171f46;
+      border-radius: 14px;
+    }
+
+    .student-answer {
+      width: 100%;
+      min-height: 110px;
+      margin-top: 10px;
+      padding: 13px;
+      background-color: #080d22;
+      color: white;
+      border: 1px solid #46558f;
+      border-radius: 10px;
+      resize: vertical;
+    }
+
+    .saved-answer {
+      display: none;
+      margin-top: 12px;
+      color: #79e7ba;
+      font-weight: bold;
+    }
+
+    .saved-answer.show {
+      display: block;
     }
 
     @media (max-width: 600px) {
@@ -335,13 +458,13 @@
         padding: 20px 12px;
       }
 
-      .top-bar {
-        align-items: flex-start;
+      .space-stage {
+        height: 340px;
       }
 
       .card,
       .activity-card {
-        padding: 19px;
+        padding: 18px;
       }
     }
   </style>
@@ -371,9 +494,8 @@
       <h2>교사용 활동 편집</h2>
 
       <div class="settings-description">
-        각 활동의 제목과 설명을 수정하고,
-        학생 화면에서 보이게 할지 결정할 수 있습니다.
-        화살표 버튼으로 활동 순서도 변경할 수 있습니다.
+        학생용 화면은 그대로 유지됩니다.
+        이곳에서 활동 제목, 설명, 질문, 안내 문구를 수정할 수 있습니다.
       </div>
 
       <div class="field">
@@ -381,10 +503,7 @@
           웹앱 메인 제목
         </label>
 
-        <input
-          id="mainTitleInput"
-          type="text"
-        >
+        <input id="mainTitleInput" type="text">
       </div>
 
       <div class="field">
@@ -399,6 +518,53 @@
         class="teacher-activity-list"
         id="teacherActivityList"
       ></div>
+
+      <section class="teacher-activity-card">
+        <h3>시간 역행 활동 상세 설정</h3>
+
+        <div class="field">
+          <label for="yellowDescriptionInput">
+            노란색 점 설명
+          </label>
+
+          <textarea id="yellowDescriptionInput"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="blueDescriptionInput">
+            파란색 점 설명
+          </label>
+
+          <textarea id="blueDescriptionInput"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="observationGuideInput">
+            관찰 안내 문구
+          </label>
+
+          <textarea id="observationGuideInput"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="reverseQuestionInput">
+            학생 질문
+          </label>
+
+          <textarea id="reverseQuestionInput"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="answerPlaceholderInput">
+            답변 입력 예시
+          </label>
+
+          <input
+            id="answerPlaceholderInput"
+            type="text"
+          >
+        </div>
+      </section>
 
       <div class="settings-actions">
         <button
@@ -417,10 +583,7 @@
         </button>
       </div>
 
-      <div
-        class="notice"
-        id="saveNotice"
-      >
+      <div class="notice" id="saveNotice">
         변경 내용이 저장되었습니다.
       </div>
     </section>
@@ -433,7 +596,7 @@
 
       <p id="mainIntro"></p>
 
-      <section class="card intro-card">
+      <section class="card">
         <h2>탐구 활동 목록</h2>
 
         <p>
@@ -534,21 +697,100 @@
       <p id="reversePageDescription"></p>
 
       <section class="card">
-        <h2>이 활동은 다음 단계에서 완성됩니다</h2>
+        <p id="observationGuide"></p>
 
-        <p>
-          다음 단계에서는 노란색 은하와 파란색 은하,
-          시간 조절 슬라이더와 은하 이동 애니메이션을
-          이 공간에 넣겠습니다.
-        </p>
+        <div class="space-panel">
+          <div
+            class="space-stage"
+            id="spaceStage"
+          >
+            <div
+              class="galaxy center-galaxy"
+              aria-label="기준 은하"
+            ></div>
+          </div>
+        </div>
 
-        <button
-          class="secondary-button"
-          type="button"
-          onclick="showHomeScreen()"
-        >
-          활동 목록으로 돌아가기
-        </button>
+        <div class="time-control">
+          <div class="time-label">
+            <span>현재에서 과거로 이동</span>
+
+            <span
+              class="time-value"
+              id="timeValue"
+            >
+              현재
+            </span>
+          </div>
+
+          <input
+            class="time-slider"
+            id="timeSlider"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            oninput="updateUniverse()"
+          >
+
+          <p>
+            슬라이더를 오른쪽으로 움직일수록
+            더 먼 과거의 우주를 나타냅니다.
+          </p>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <span
+              class="legend-dot yellow-dot"
+            ></span>
+
+            <span id="yellowDescription"></span>
+          </div>
+
+          <div class="legend-item">
+            <span
+              class="legend-dot blue-dot"
+            ></span>
+
+            <span id="blueDescription"></span>
+          </div>
+        </div>
+
+        <div class="question-box">
+          <h2>관찰 결과 기록</h2>
+
+          <p id="reverseQuestion"></p>
+
+          <textarea
+            class="student-answer"
+            id="reverseAnswer"
+          ></textarea>
+
+          <div class="action-area">
+            <button
+              class="secondary-button"
+              type="button"
+              onclick="showHomeScreen()"
+            >
+              활동 목록
+            </button>
+
+            <button
+              type="button"
+              onclick="saveReverseAnswer()"
+            >
+              답변 저장
+            </button>
+          </div>
+
+          <div
+            class="saved-answer"
+            id="reverseAnswerNotice"
+          >
+            답변이 저장되었습니다.
+          </div>
+        </div>
       </section>
     </section>
 
@@ -576,11 +818,39 @@
             "팽창하는 우주의 시간을 거꾸로 돌리며 과거 은하 사이의 거리 변화를 관찰합니다.",
           visible: true
         }
-      ]
+      ],
+
+      reverseTimeSettings: {
+        yellowDescription:
+          "노란색 점은 관찰의 기준이 되는 우리 은하를 나타냅니다.",
+
+        blueDescription:
+          "파란색 점은 우리 은하에서 멀어지는 다른 은하들을 나타냅니다.",
+
+        observationGuide:
+          "시간 슬라이더를 움직여 과거로 갈수록 은하 사이의 거리가 어떻게 달라지는지 관찰하세요.",
+
+        question:
+          "시간을 과거로 돌릴수록 은하 사이의 거리는 어떻게 변했나요? 이 관찰을 통해 초기 우주의 모습은 어떠했을지 설명해 보세요.",
+
+        answerPlaceholder:
+          "예: 과거로 갈수록 은하 사이의 거리가..."
+      }
     };
 
     let appData = loadAppData();
     let selectedAge = null;
+
+    const galaxyPositions = [
+      { x: 18, y: 22 },
+      { x: 37, y: 18 },
+      { x: 67, y: 20 },
+      { x: 82, y: 30 },
+      { x: 20, y: 58 },
+      { x: 35, y: 75 },
+      { x: 68, y: 72 },
+      { x: 84, y: 60 }
+    ];
 
     function cloneDefaultData() {
       return JSON.parse(
@@ -602,14 +872,38 @@
         const parsedData =
           JSON.parse(savedData);
 
-        if (
-          !parsedData.activities ||
-          !Array.isArray(parsedData.activities)
-        ) {
-          return cloneDefaultData();
+        const mergedData =
+          cloneDefaultData();
+
+        if (parsedData.mainTitle) {
+          mergedData.mainTitle =
+            parsedData.mainTitle;
         }
 
-        return parsedData;
+        if (parsedData.mainIntro) {
+          mergedData.mainIntro =
+            parsedData.mainIntro;
+        }
+
+        if (
+          Array.isArray(
+            parsedData.activities
+          )
+        ) {
+          mergedData.activities =
+            parsedData.activities;
+        }
+
+        if (
+          parsedData.reverseTimeSettings
+        ) {
+          mergedData.reverseTimeSettings = {
+            ...mergedData.reverseTimeSettings,
+            ...parsedData.reverseTimeSettings
+          };
+        }
+
+        return mergedData;
       } catch (error) {
         return cloneDefaultData();
       }
@@ -633,6 +927,7 @@
       renderMainText();
       renderStudentActivities();
       renderTeacherActivities();
+      renderReverseTimeSettings();
       updateActivityPages();
     }
 
@@ -671,7 +966,7 @@
 
       if (visibleActivities.length === 0) {
         list.innerHTML = `
-          <div class="hidden-message">
+          <div class="card">
             현재 학생에게 공개된 활동이 없습니다.
           </div>
         `;
@@ -684,14 +979,17 @@
           const card =
             document.createElement("section");
 
-          card.className = "activity-card";
+          card.className =
+            "activity-card";
 
           card.innerHTML = `
             <span class="activity-number">
               ACTIVITY ${index + 1}
             </span>
 
-            <h2>${escapeHtml(activity.title)}</h2>
+            <h2>
+              ${escapeHtml(activity.title)}
+            </h2>
 
             <p>
               ${escapeHtml(activity.description)}
@@ -732,9 +1030,7 @@
             </h3>
 
             <div class="field">
-              <label
-                for="activityTitle${index}"
-              >
+              <label>
                 활동 제목
               </label>
 
@@ -746,9 +1042,7 @@
             </div>
 
             <div class="field">
-              <label
-                for="activityDescription${index}"
-              >
+              <label>
                 활동 설명
               </label>
 
@@ -802,6 +1096,81 @@
       );
     }
 
+    function renderReverseTimeSettings() {
+      const settings =
+        appData.reverseTimeSettings;
+
+      document
+        .getElementById(
+          "yellowDescriptionInput"
+        )
+        .value =
+        settings.yellowDescription;
+
+      document
+        .getElementById(
+          "blueDescriptionInput"
+        )
+        .value =
+        settings.blueDescription;
+
+      document
+        .getElementById(
+          "observationGuideInput"
+        )
+        .value =
+        settings.observationGuide;
+
+      document
+        .getElementById(
+          "reverseQuestionInput"
+        )
+        .value =
+        settings.question;
+
+      document
+        .getElementById(
+          "answerPlaceholderInput"
+        )
+        .value =
+        settings.answerPlaceholder;
+
+      document
+        .getElementById(
+          "yellowDescription"
+        )
+        .textContent =
+        settings.yellowDescription;
+
+      document
+        .getElementById(
+          "blueDescription"
+        )
+        .textContent =
+        settings.blueDescription;
+
+      document
+        .getElementById(
+          "observationGuide"
+        )
+        .textContent =
+        settings.observationGuide;
+
+      document
+        .getElementById(
+          "reverseQuestion"
+        )
+        .textContent =
+        settings.question;
+
+      document
+        .getElementById(
+          "reverseAnswer"
+        )
+        .placeholder =
+        settings.answerPlaceholder;
+    }
+
     function collectTeacherInputs() {
       appData.mainTitle =
         document
@@ -841,6 +1210,48 @@
               .checked;
         }
       );
+
+      appData.reverseTimeSettings = {
+        yellowDescription:
+          document
+            .getElementById(
+              "yellowDescriptionInput"
+            )
+            .value
+            .trim(),
+
+        blueDescription:
+          document
+            .getElementById(
+              "blueDescriptionInput"
+            )
+            .value
+            .trim(),
+
+        observationGuide:
+          document
+            .getElementById(
+              "observationGuideInput"
+            )
+            .value
+            .trim(),
+
+        question:
+          document
+            .getElementById(
+              "reverseQuestionInput"
+            )
+            .value
+            .trim(),
+
+        answerPlaceholder:
+          document
+            .getElementById(
+              "answerPlaceholderInput"
+            )
+            .value
+            .trim()
+      };
     }
 
     function saveTeacherSettings() {
@@ -876,6 +1287,8 @@
       appData = cloneDefaultData();
 
       renderAll();
+      createGalaxies();
+      updateUniverse();
     }
 
     function moveActivity(
@@ -914,14 +1327,16 @@
       const predictionActivity =
         appData.activities.find(
           function (activity) {
-            return activity.id === "prediction";
+            return activity.id ===
+              "prediction";
           }
         );
 
       const reverseTimeActivity =
         appData.activities.find(
           function (activity) {
-            return activity.id === "reverseTime";
+            return activity.id ===
+              "reverseTime";
           }
         );
 
@@ -962,7 +1377,9 @@
       document
         .querySelectorAll(".screen")
         .forEach(function (screen) {
-          screen.classList.remove("active");
+          screen.classList.remove(
+            "active"
+          );
         });
     }
 
@@ -971,7 +1388,8 @@
 
       document
         .getElementById("homeScreen")
-        .classList.add("active");
+        .classList
+        .add("active");
 
       window.scrollTo(0, 0);
     }
@@ -984,7 +1402,8 @@
           .getElementById(
             "predictionScreen"
           )
-          .classList.add("active");
+          .classList
+          .add("active");
       }
 
       if (activityId === "reverseTime") {
@@ -992,7 +1411,10 @@
           .getElementById(
             "reverseTimeScreen"
           )
-          .classList.add("active");
+          .classList
+          .add("active");
+
+        updateUniverse();
       }
 
       window.scrollTo(0, 0);
@@ -1047,6 +1469,165 @@
       );
     }
 
+    function createStars() {
+      const stage =
+        document.getElementById(
+          "spaceStage"
+        );
+
+      for (let i = 0; i < 70; i++) {
+        const star =
+          document.createElement("div");
+
+        star.className = "star";
+        star.style.left =
+          Math.random() * 100 + "%";
+        star.style.top =
+          Math.random() * 100 + "%";
+        star.style.opacity =
+          0.25 + Math.random() * 0.65;
+
+        stage.appendChild(star);
+      }
+    }
+
+    function createGalaxies() {
+      const stage =
+        document.getElementById(
+          "spaceStage"
+        );
+
+      stage
+        .querySelectorAll(
+          ".outer-galaxy"
+        )
+        .forEach(function (galaxy) {
+          galaxy.remove();
+        });
+
+      galaxyPositions.forEach(
+        function (position, index) {
+          const galaxy =
+            document.createElement("div");
+
+          galaxy.className =
+            "galaxy outer-galaxy";
+
+          galaxy.dataset.index = index;
+
+          stage.appendChild(galaxy);
+        }
+      );
+    }
+
+    function updateUniverse() {
+      const slider =
+        document.getElementById(
+          "timeSlider"
+        );
+
+      const pastAmount =
+        Number(slider.value) / 100;
+
+      const contraction =
+        1 - pastAmount * 0.78;
+
+      document
+        .getElementById("timeValue")
+        .textContent =
+        slider.value === "0"
+          ? "현재"
+          : slider.value +
+            "% 과거";
+
+      document
+        .querySelectorAll(
+          ".outer-galaxy"
+        )
+        .forEach(function (galaxy) {
+          const index =
+            Number(
+              galaxy.dataset.index
+            );
+
+          const original =
+            galaxyPositions[index];
+
+          const newX =
+            50 +
+            (original.x - 50) *
+            contraction;
+
+          const newY =
+            50 +
+            (original.y - 50) *
+            contraction;
+
+          galaxy.style.left =
+            newX + "%";
+
+          galaxy.style.top =
+            newY + "%";
+
+          const scale =
+            0.7 +
+            contraction * 0.3;
+
+          galaxy.style.transform =
+            "translate(-50%, -50%) " +
+            "scale(" + scale + ")";
+        });
+    }
+
+    function saveReverseAnswer() {
+      const answer =
+        document
+          .getElementById(
+            "reverseAnswer"
+          )
+          .value
+          .trim();
+
+      if (!answer) {
+        alert(
+          "관찰 결과를 먼저 입력해 주세요."
+        );
+
+        return;
+      }
+
+      localStorage.setItem(
+        "universeAgeReverseAnswer",
+        answer
+      );
+
+      const notice =
+        document.getElementById(
+          "reverseAnswerNotice"
+        );
+
+      notice.classList.add("show");
+
+      setTimeout(function () {
+        notice.classList.remove("show");
+      }, 2200);
+    }
+
+    function loadStudentAnswers() {
+      const savedAnswer =
+        localStorage.getItem(
+          "universeAgeReverseAnswer"
+        );
+
+      if (savedAnswer) {
+        document
+          .getElementById(
+            "reverseAnswer"
+          )
+          .value = savedAnswer;
+      }
+    }
+
     function escapeHtml(text) {
       return String(text)
         .replaceAll("&", "&amp;")
@@ -1061,6 +1642,10 @@
     }
 
     renderAll();
+    createStars();
+    createGalaxies();
+    updateUniverse();
+    loadStudentAnswers();
   </script>
 </body>
 </html>
