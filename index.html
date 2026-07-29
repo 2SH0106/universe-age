@@ -27,6 +27,12 @@
       margin: 0 auto;
     }
 
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
     h1 {
       color: #f0d082;
     }
@@ -58,30 +64,306 @@
     button:hover {
       opacity: 0.9;
     }
+
+    .settings-button {
+      background-color: #f0d082;
+      color: #171b34;
+    }
+
+    .settings-panel {
+      display: none;
+      margin-bottom: 24px;
+      padding: 20px;
+      background-color: #111936;
+      border: 1px solid #f0d082;
+      border-radius: 16px;
+    }
+
+    .settings-panel.open {
+      display: block;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #f0d082;
+      font-weight: bold;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      background-color: #080d22;
+      color: white;
+      border: 1px solid #2a3468;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .settings-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .reset-button {
+      background-color: #ff8daa;
+      color: #31121a;
+    }
+
+    .notice {
+      display: none;
+      margin-top: 12px;
+      color: #57d9a3;
+      font-weight: bold;
+    }
   </style>
 </head>
 
 <body>
   <main class="container">
-    <h1>우주의 나이를 밝혀라</h1>
 
-    <p>
+    <div class="top-bar">
+      <button
+        class="settings-button"
+        type="button"
+        onclick="toggleSettings()"
+      >
+        ⚙ 교사용 편집
+      </button>
+    </div>
+
+    <section
+      class="settings-panel"
+      id="settingsPanel"
+    >
+      <h2>교사용 문구 설정</h2>
+
+      <div class="field">
+        <label for="titleInput">
+          메인 제목
+        </label>
+
+        <input
+          id="titleInput"
+          type="text"
+        >
+      </div>
+
+      <div class="field">
+        <label for="introInput">
+          첫 번째 설명
+        </label>
+
+        <textarea id="introInput"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="predictTitleInput">
+          활동 제목
+        </label>
+
+        <input
+          id="predictTitleInput"
+          type="text"
+        >
+      </div>
+
+      <div class="field">
+        <label for="predictTextInput">
+          활동 설명
+        </label>
+
+        <textarea id="predictTextInput"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="buttonTextInput">
+          버튼 문구
+        </label>
+
+        <input
+          id="buttonTextInput"
+          type="text"
+        >
+      </div>
+
+      <div class="settings-actions">
+        <button
+          type="button"
+          onclick="saveSettings()"
+        >
+          저장하기
+        </button>
+
+        <button
+          class="reset-button"
+          type="button"
+          onclick="resetSettings()"
+        >
+          기본값으로 되돌리기
+        </button>
+      </div>
+
+      <div
+        class="notice"
+        id="saveNotice"
+      >
+        저장되었습니다.
+      </div>
+    </section>
+
+    <h1 id="mainTitle">
+      우주의 나이를 밝혀라
+    </h1>
+
+    <p id="mainIntro">
       실제 천문학 데이터를 활용하여
       우주의 나이를 추정하는 탐구 활동입니다.
     </p>
 
     <section class="card">
-      <h2>예측하기</h2>
+      <h2 id="predictTitle">
+        예측하기
+      </h2>
 
-      <p>
+      <p id="predictText">
         우주의 나이는 약 몇 억 년일까요?
         자료를 분석하기 전에 먼저 예상해 봅시다.
       </p>
 
-      <button type="button">
+      <button
+        id="startButton"
+        type="button"
+      >
         탐구 시작
       </button>
     </section>
   </main>
+
+  <script>
+    const defaultSettings = {
+      mainTitle: "우주의 나이를 밝혀라",
+
+      mainIntro:
+        "실제 천문학 데이터를 활용하여 우주의 나이를 추정하는 탐구 활동입니다.",
+
+      predictTitle: "예측하기",
+
+      predictText:
+        "우주의 나이는 약 몇 억 년일까요? 자료를 분석하기 전에 먼저 예상해 봅시다.",
+
+      buttonText: "탐구 시작"
+    };
+
+    function loadSettings() {
+      const savedSettings =
+        localStorage.getItem("universeAgeSettings");
+
+      if (savedSettings) {
+        return JSON.parse(savedSettings);
+      }
+
+      return defaultSettings;
+    }
+
+    function applySettings(settings) {
+      document.getElementById("mainTitle").textContent =
+        settings.mainTitle;
+
+      document.getElementById("mainIntro").textContent =
+        settings.mainIntro;
+
+      document.getElementById("predictTitle").textContent =
+        settings.predictTitle;
+
+      document.getElementById("predictText").textContent =
+        settings.predictText;
+
+      document.getElementById("startButton").textContent =
+        settings.buttonText;
+
+      document.getElementById("titleInput").value =
+        settings.mainTitle;
+
+      document.getElementById("introInput").value =
+        settings.mainIntro;
+
+      document.getElementById("predictTitleInput").value =
+        settings.predictTitle;
+
+      document.getElementById("predictTextInput").value =
+        settings.predictText;
+
+      document.getElementById("buttonTextInput").value =
+        settings.buttonText;
+    }
+
+    function toggleSettings() {
+      document
+        .getElementById("settingsPanel")
+        .classList
+        .toggle("open");
+    }
+
+    function saveSettings() {
+      const newSettings = {
+        mainTitle:
+          document.getElementById("titleInput").value,
+
+        mainIntro:
+          document.getElementById("introInput").value,
+
+        predictTitle:
+          document.getElementById("predictTitleInput").value,
+
+        predictText:
+          document.getElementById("predictTextInput").value,
+
+        buttonText:
+          document.getElementById("buttonTextInput").value
+      };
+
+      localStorage.setItem(
+        "universeAgeSettings",
+        JSON.stringify(newSettings)
+      );
+
+      applySettings(newSettings);
+
+      const notice =
+        document.getElementById("saveNotice");
+
+      notice.style.display = "block";
+
+      setTimeout(function () {
+        notice.style.display = "none";
+      }, 2000);
+    }
+
+    function resetSettings() {
+      localStorage.removeItem(
+        "universeAgeSettings"
+      );
+
+      applySettings(defaultSettings);
+    }
+
+    const currentSettings = loadSettings();
+
+    applySettings(currentSettings);
+  </script>
 </body>
 </html>
