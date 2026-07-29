@@ -1544,13 +1544,27 @@
       const contraction =
         1 - pastAmount * 0.78;
 
-      document
-        .getElementById("timeValue")
-        .textContent =
-        slider.value === "0"
-          ? "현재"
-          : slider.value +
-            "% 과거";
+      let timeText = "현재";
+
+if (pastAmount > 0 && pastAmount <= 0.25) {
+  timeText = "가까운 과거";
+} else if (
+  pastAmount > 0.25 &&
+  pastAmount <= 0.5
+) {
+  timeText = "과거";
+} else if (
+  pastAmount > 0.5 &&
+  pastAmount <= 0.75
+) {
+  timeText = "먼 과거";
+} else if (pastAmount > 0.75) {
+  timeText = "아주 먼 과거";
+}
+
+document
+  .getElementById("timeValue")
+  .textContent = timeText;
 
       document
         .querySelectorAll(
